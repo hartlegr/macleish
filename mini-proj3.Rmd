@@ -24,7 +24,7 @@ ggplot()+
   geom_sf(data =macleish_layers[["research"]], fill = "orange")+
   geom_sf(data =macleish_layers[["contours_30ft"]], col="red") + 
   geom_sf(data =macleish_layers[["wetlands"]], fill = "yellow") + 
-  geom_sf(data =macleish_layers[["property"]])
+  geom_sf(data =macleish_layers[["boundary"]])
   
 ```
 
