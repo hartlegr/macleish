@@ -17,10 +17,14 @@ library(macleish)
 
 ```{r}
 ggplot()+
-  geom_sf(data =macleish_layers[["trails"]]) +
-  geom_sf(data =macleish_layers[["forests"]], aes(fill = Sheet1__Ve)) +
-  geom_sf(data =macleish_layers[["streams"]]) + 
-  geom_sf(data =macleish_layers[["challenge_courses"]]) + 
-  geom_sf(data =macleish_layers[["research"]])
+  geom_sf(data =macleish_layers[["trails"]], col = "green") +
+  geom_sf(data =macleish_layers[["forests"]]) +
+  geom_sf(data =macleish_layers[["streams"]], col = "blue") + 
+  geom_sf(data =macleish_layers[["challenge_courses"]], fill = "orange") + 
+  geom_sf(data =macleish_layers[["research"]], fill = "orange")+
+  geom_sf(data =macleish_layers[["contours_30ft"]], col="red") + 
+  geom_sf(data =macleish_layers[["wetlands"]], fill = "yellow") + 
+  geom_sf(data =macleish_layers[["property"]])
+  
 ```
 
