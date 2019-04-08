@@ -13,3 +13,14 @@ library(sf)
 library(macleish)
 
 ```
+
+
+```{r}
+ggplot()+
+  geom_sf(data =macleish_layers[["trails"]]) +
+  geom_sf(data =macleish_layers[["forests"]], aes(fill = Sheet1__Ve)) +
+  geom_sf(data =macleish_layers[["streams"]]) + 
+  geom_sf(data =macleish_layers[["challenge_courses"]]) + 
+  geom_sf(data =macleish_layers[["research"]])
+```
+
