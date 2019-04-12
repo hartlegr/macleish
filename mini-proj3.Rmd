@@ -92,6 +92,10 @@ base_plot %>%
   addPolygons(data = stream_buffer, col = "gray")
 ```
 
+```{r}
+parking <- (coords = c( -72.680663, 42.448013))
+
+```
 
 
 ```{r}
