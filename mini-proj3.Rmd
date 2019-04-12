@@ -14,17 +14,37 @@ library(macleish)
 
 ```
 
+This is code from his lecture on 4/3 that may be helpful?
+```{r}
+
+
+macleish_layers %>%
+  pluck("streams") %>%
+  st_transform(I don't know what to put here) %>%
+  st_buffer(dist = 10) %>%
+  st_transform(4326)
+```
 
 ```{r}
 ggplot()+
+  geom_sf(data =macleish_layers[["boundary"]]) +
   geom_sf(data =macleish_layers[["trails"]], col = "green") +
   geom_sf(data =macleish_layers[["forests"]]) +
   geom_sf(data =macleish_layers[["streams"]], col = "blue") + 
   geom_sf(data =macleish_layers[["challenge_courses"]], fill = "orange") + 
   geom_sf(data =macleish_layers[["research"]], fill = "orange")+
   geom_sf(data =macleish_layers[["contours_30ft"]], col="red") + 
-  geom_sf(data =macleish_layers[["wetlands"]], fill = "yellow") + 
-  geom_sf(data =macleish_layers[["boundary"]])
+  geom_sf(data =macleish_layers[["wetlands"]], fill = "yellow") 
   
 ```
 
+
+```{r}
+
+
+st_as_sf(macleish_layers) %>% st_transform(3488)
+
+macleish_layers %>%
+  pluck("streams") %>%
+  st_buffer(dist = 0.1)
+```
