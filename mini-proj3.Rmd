@@ -48,3 +48,26 @@ macleish_layers %>%
   pluck("streams") %>%
   st_buffer(dist = 0.1)
 ```
+
+
+```{r}
+library(leaflet)
+
+leaflet() %>%
+  addTiles() %>%
+  addPolylines(data = pluck(macleish_layers, "streams")) %>%
+  addPolylines(data = pluck(macleish_layers, "boundary"), col = "red")%>%
+  #addPolygons(data = pluck(macleish_layers, "forests"))%>%
+  addPolylines(data = pluck(macleish_layers, "trails"), col = "green")%>%
+  addMarkers(data = pluck(macleish_layers, "challenge_courses"), popup = ~cmt)%>%
+  addPolygons(data = pluck(macleish_layers, "research"), col = "orange")%>%
+  addPolygons(data = pluck(macleish_layers, "wetlands"), col = "red")%>%
+  #addPolygons(data = pluck(macleish_layers, "contours_30ft"))%>%
+  addMarkers(lng = -72.678154, lat =  42.450976, popup = "Group Campsite") %>%
+  addMarkers(lng = -72.679581, lat = 42.458549, popup = "Remote Campsite") %>%
+  addMarkers(lng = -72.680663, lat = 42.448013, popup = "Parking")%>%
+  addMarkers(lng = -72.680315, lat = 42.449653, popup = "OrchardMet Weather Station")%>%
+  addMarkers(lng = -72.680553, lat = 42.448470, popup = "WhatelyMet Weather Station")
+  
+
+```
