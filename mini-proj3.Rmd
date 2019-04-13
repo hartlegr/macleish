@@ -18,15 +18,15 @@ This is code from his lecture on 4/3 that may be helpful?
 ```{r}
 
 
-macleish_layers %>%
-  pluck("streams") %>%
-  st_transform(I don't know what to put here) %>%
-  st_buffer(dist = 10) %>%
-  st_transform(4326)
+#macleish_layers %>%
+ # pluck("streams") %>%
+  #st_transform(I don't know what to put here) %>%
+  #st_buffer(dist = 10) %>%
+  #st_transform(4326)
 ```
 
 ```{r}
-ggplot()+
+ggplot(macleish_layers)+
   geom_sf(data =macleish_layers[["boundary"]]) +
   geom_sf(data =macleish_layers[["trails"]], col = "green") +
   geom_sf(data =macleish_layers[["forests"]]) +
