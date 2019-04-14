@@ -26,7 +26,7 @@ This is code from his lecture on 4/3 that may be helpful?
 ```
 
 ```{r}
-ggplot(macleish_layers)+
+ggplot()+
   geom_sf(data =macleish_layers[["boundary"]]) +
   geom_sf(data =macleish_layers[["trails"]], col = "green") +
   geom_sf(data =macleish_layers[["forests"]]) +
@@ -105,4 +105,23 @@ parking_buffer <-
   st_transform(4326)
 ```
 
+```{r}
+research_buffer <- 
+  pluck("research")%>%
+  st_transform(proj4_aea)%>%
+  st_buffer(dist >= 500) %>%
+  st_transform(4326)
+```
+
+```{r}
+challenge_buffer <- 
+  pluck("challenge_courses")%>%
+  st_transform(proj4_aea)%>%
+  st_buffer(dist >= 500)%>%
+  st_transform(4326)
+```
+
+```{r}
+
+```
 
