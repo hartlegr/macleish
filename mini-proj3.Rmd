@@ -39,7 +39,7 @@ ggplot()+
 ```
 
 
-```{r}
+```{r, eval = FALSE}
 
 
 st_as_sf(macleish_layers) %>% st_transform(3488)
@@ -55,13 +55,13 @@ library(leaflet)
 
 base_plot <- leaflet() %>%
   addTiles() %>%
-  addPolylines(data = pluck(macleish_layers, "streams")) %>%
-  addPolylines(data = pluck(macleish_layers, "boundary"), col = "red")%>%
+#  addPolylines(data = pluck(macleish_layers, "streams")) %>%
+#  addPolylines(data = pluck(macleish_layers, "boundary"), col = "red")%>%
   #addPolygons(data = pluck(macleish_layers, "forests"))%>%
-  addPolylines(data = pluck(macleish_layers, "trails"), col = "green")%>%
-  addMarkers(data = pluck(macleish_layers, "challenge_courses"), popup = ~cmt)%>%
-  addPolygons(data = pluck(macleish_layers, "research"), col = "orange")%>%
-  addPolygons(data = pluck(macleish_layers, "wetlands"), col = "red")%>%
+#  addPolylines(data = pluck(macleish_layers, "trails"), col = "green")%>%
+#  addMarkers(data = pluck(macleish_layers, "challenge_courses"), popup = ~cmt)%>%
+#  addPolygons(data = pluck(macleish_layers, "research"), col = "orange")%>%
+#  addPolygons(data = pluck(macleish_layers, "wetlands"), col = "red")%>%
   #addPolygons(data = pluck(macleish_layers, "contours_30ft"))%>%
   addMarkers(lng = -72.678154, lat =  42.450976, popup = "Group Campsite") %>%
   addMarkers(lng = -72.679581, lat = 42.458549, popup = "Remote Campsite") %>%
@@ -87,10 +87,7 @@ stream_buffer <- macleish_layers %>%
 ```
 
 
-```{r}
-base_plot %>%
-  addPolygons(data = stream_buffer, col = "gray")
-```
+
 
 ```{r}
 parking <- (coords = c( -72.680663, 42.448013))
@@ -98,7 +95,7 @@ parking <- (coords = c( -72.680663, 42.448013))
 ```
 
 
-```{r}
+```{r, eval = FALSE}
 parking_buffer <- 
   st_transform(proj4_aea) %>%
   st_buffer(dist = 200) %>%
@@ -109,19 +106,41 @@ parking_buffer <-
 research_buffer <- macleish_layers %>%
   pluck("research")%>%
   st_transform(proj4_aea)%>%
-  st_buffer(dist >= 500) %>%
+  st_buffer(dist = 500) %>%
   st_transform(4326)
 ```
 
 ```{r}
-challenge_buffer <- 
+challenge_buffer <- macleish_layers %>% 
   pluck("challenge_courses")%>%
   st_transform(proj4_aea)%>%
-  st_buffer(dist >= 500)%>%
+  st_buffer(dist = 500)%>%
   st_transform(4326)
 ```
 
 ```{r}
+forests1 <- macleish_layers%>%
+  pluck("forests")%>%
+  filter(!is.na(VegType_21))%>%
+  group_by(VegType_21)%>%
+  summarize(N = n())
 
 ```
 
+```{r}
+pal <- colorNumeric(
+  palette = "viridis", 
+  domain = forests1$VegType_21
+)
+```
+
+```{r}
+base_plot %>%
+  addPolygons(data = forests1, color = ~pal(VegType_21))
+```
+
+
+```{r}
+base_plot
+
+```
