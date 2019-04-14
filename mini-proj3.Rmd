@@ -106,7 +106,7 @@ parking_buffer <-
 ```
 
 ```{r}
-research_buffer <- 
+research_buffer <- macleish_layers %>%
   pluck("research")%>%
   st_transform(proj4_aea)%>%
   st_buffer(dist >= 500) %>%
