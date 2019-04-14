@@ -150,3 +150,8 @@ base_plot %>%
 base_plot
 
 ```
+
+```{r}
+base_plot +
+addLegend(pal = qpal, values = ~VegType_21, opacity = 1)
+```
