@@ -62,13 +62,13 @@ library(leaflet)
 base_plot <- leaflet() %>%
   addTiles() %>%
 #  addPolylines(data = pluck(macleish_layers, "streams")) %>%
-#  addPolylines(data = pluck(macleish_layers, "boundary"), col = "red")%>%
+  addPolylines(data = pluck(macleish_layers, "boundary"), col = "black")%>%
   #addPolygons(data = pluck(macleish_layers, "forests"))%>%
 #  addPolylines(data = pluck(macleish_layers, "trails"), col = "green")%>%
 #  addMarkers(data = pluck(macleish_layers, "challenge_courses"), popup = ~cmt)%>%
 #  addPolygons(data = pluck(macleish_layers, "research"), col = "orange")%>%
-#  addPolygons(data = pluck(macleish_layers, "wetlands"), col = "red")%>%
-  #addPolygons(data = pluck(macleish_layers, "contours_30ft"))%>%
+  addPolygons(data = pluck(macleish_layers, "wetlands"), col = "red")%>%
+ # addPolygons(data = pluck(macleish_layers, "contours_30ft"), col = "red")%>%
   addMarkers(lng = -72.678154, lat =  42.450976, popup = "Group Campsite") %>%
   addMarkers(lng = -72.679581, lat = 42.458549, popup = "Remote Campsite") %>%
   addMarkers(lng = -72.680663, lat = 42.448013, popup = "Parking")%>%
@@ -150,11 +150,33 @@ treeplot
 
 ```{r}
 base_plot %>%
-  addPolygons(data = challenge_buffer)
+  addPolygons(data = stream_buffer)%>%
+  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1")%>%
+  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2")
+
+ 
 
 ```
 
 ```{r}
 treeplot %>%
+  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1")%>%
+  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2")
+
+```
+
+
+```{r}
+treeplot %>%
 addLegend(map, position = c("bottomright"), pal = qpal, values = ~VegType_21, opacity = 1)
+```
+
+
+```{r}
+base_plot%>%
+  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1")%>%
+  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2")%>%
+  addPolygons(data = pluck(macleish_layers, "contours_3m"), col = "red")
+  
+
 ```
