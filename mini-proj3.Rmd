@@ -20,16 +20,7 @@ library(macleish)
 
 ```
 
-This is code from his lecture on 4/3 that may be helpful?
-```{r}
 
-
-#macleish_layers %>%
- # pluck("streams") %>%
-  #st_transform(I don't know what to put here) %>%
-  #st_buffer(dist = 10) %>%
-  #st_transform(4326)
-```
 
 ```{r}
 ggplot()+
@@ -159,7 +150,7 @@ base_plot %>%
 ```
 
 ```{r}
-  cowIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Cow-icon.png", iconWidth = 20, iconHeight = 30)
+  cowIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Cow-icon.png", iconWidth = 35, iconHeight = 40)
 ```
 
 
