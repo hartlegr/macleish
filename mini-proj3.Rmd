@@ -53,12 +53,12 @@ library(leaflet)
 base_plot <- leaflet() %>%
   addTiles() %>%
 #  addPolylines(data = pluck(macleish_layers, "streams")) %>%
-  addPolylines(data = pluck(macleish_layers, "boundary"), col = "black")%>%
+  addPolylines(data = pluck(macleish_layers, "boundary"), col = "black", weight = 3)%>%
   #addPolygons(data = pluck(macleish_layers, "forests"))%>%
 #  addPolylines(data = pluck(macleish_layers, "trails"), col = "green")%>%
 #  addMarkers(data = pluck(macleish_layers, "challenge_courses"), popup = ~cmt)%>%
 #  addPolygons(data = pluck(macleish_layers, "research"), col = "orange")%>%
-  addPolygons(data = pluck(macleish_layers, "wetlands"), col = "red")%>%
+  addPolygons(data = pluck(macleish_layers, "wetlands"), col = "red", weight = 2)%>%
  # addPolygons(data = pluck(macleish_layers, "contours_30ft"), col = "red")%>%
   addMarkers(lng = -72.678154, lat =  42.450976, popup = "Group Campsite") %>%
   addMarkers(lng = -72.679581, lat = 42.458549, popup = "Remote Campsite") %>%
@@ -133,7 +133,7 @@ pal <- colorNumeric(
 
 ```{r}
 treeplot <- base_plot %>%
-  addPolygons(data = forests1, color = ~pal(VegType_21))
+  addPolygons(data = forests1, color = ~pal(VegType_21), weight = 2)
 
 treeplot
 ```
@@ -151,13 +151,15 @@ base_plot %>%
 
 ```{r}
   cowIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Cow-icon.png", iconWidth = 35, iconHeight = 40)
+
+cowIcon <- makeIcon(iconUrl = , iconWidth = 35, iconHeight = 40)
 ```
 
 
 ```{r}
 treeplot %>%
   addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1", icon = cowIcon)%>%
-  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2")
+  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2", icon = greenLeafIcon)
 
 ```
 
