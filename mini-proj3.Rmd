@@ -152,14 +152,14 @@ base_plot %>%
 ```{r}
   cowIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Cow-icon.png", iconWidth = 35, iconHeight = 40)
 
-cowIcon <- makeIcon(iconUrl = , iconWidth = 35, iconHeight = 40)
+TreeIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Tree-3-icon.png", iconWidth = 40, iconHeight = 40)
 ```
 
 
 ```{r}
 treeplot %>%
-  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1", icon = cowIcon)%>%
-  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2", icon = greenLeafIcon)
+  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Cow Camp", icon = cowIcon)%>%
+  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Woods Romp", icon = TreeIcon)
 
 ```
 
