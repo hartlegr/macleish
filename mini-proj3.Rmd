@@ -96,13 +96,13 @@ stream_buffer <- macleish_layers %>%
 
 
 ```{r}
-parking <- (coords = c( -72.680663, 42.448013))
-
+parking <- (coords = c( -72.680663, 42.448013)) %>%
+ st_as_sf()
 ```
 
 
 ```{r, eval = FALSE}
-parking_buffer <- 
+parking_buffer <- parking %>%
   st_transform(proj4_aea) %>%
   st_buffer(dist = 200) %>%
   st_transform(4326)
@@ -141,17 +141,20 @@ pal <- colorNumeric(
 ```
 
 ```{r}
-base_plot %>%
+treeplot <- base_plot %>%
   addPolygons(data = forests1, color = ~pal(VegType_21))
+
+treeplot
 ```
 
 
 ```{r}
-base_plot
+base_plot %>%
+  addPolygons(data = challenge_buffer)
 
 ```
 
 ```{r}
-base_plot +
-addLegend(pal = qpal, values = ~VegType_21, opacity = 1)
+treeplot %>%
+addLegend(map, position = c("bottomright"), pal = qpal, values = ~VegType_21, opacity = 1)
 ```
