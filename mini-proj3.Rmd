@@ -1,5 +1,5 @@
 ---
-title: "Cow Camp & Woods Romp: A New Camping Experience"
+title: "Cow Camp & Woods Romp: Camping Revolutionized"
 output: 
   html_document:
     code_folding: hide
@@ -73,14 +73,14 @@ parking_buffer
 ```
 Any point along the outside of the circle is 0.5 miles from the parking lot. We decided to put one site at 0.5 miles away (Woods Romp) and another slightly closer (Cow Camp). 
 
-```{r}
+```{r, echo = FALSE}
 proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
 
 
 ```
 
 
-```{r}
+```{r, echo = FALSE}
 stream_buffer <- macleish_layers %>%
   pluck("streams") %>%
   st_transform(proj4_aea) %>%
@@ -90,7 +90,7 @@ stream_buffer <- macleish_layers %>%
 ```
 
 
-```{r}
+```{r, echo = FALSE}
 research_buffer <- macleish_layers %>%
   pluck("research")%>%
   st_transform(proj4_aea)%>%
@@ -98,7 +98,7 @@ research_buffer <- macleish_layers %>%
   st_transform(4326)
 ```
 
-```{r}
+```{r, echo = FALSE}
 challenge_buffer <- macleish_layers %>% 
   pluck("challenge_courses")%>%
   st_transform(proj4_aea)%>%
@@ -106,8 +106,8 @@ challenge_buffer <- macleish_layers %>%
   st_transform(4326)
 ```
 
-#Mapped vegetation types:
-```{r}
+
+```{r, echo = FALSE}
 forests1 <- macleish_layers%>%
   pluck("forests")%>%
   filter(!is.na(VegType_21))%>%
@@ -116,13 +116,13 @@ forests1 <- macleish_layers%>%
 
 ```
 
-```{r}
+```{r, echo = FALSE}
 pal <- colorNumeric(
   palette = "inferno", 
   domain = forests1$VegType_21
 )
 ```
-
+#Mapped vegetation types:
 ```{r}
 treeplot <- base_plot%>%
   addPolygons(data = forests1, color = ~pal(VegType_21), weight = 1)
