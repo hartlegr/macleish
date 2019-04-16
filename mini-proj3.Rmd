@@ -29,6 +29,7 @@ library(macleish)
 
 
 
+
 ```{r, echo = FALSE}
 library(leaflet)
 
@@ -166,3 +167,9 @@ base_plot%>%
   
 
 ```
+
+#Ready to camp?
+
+Rent gear for your trip [here](https://smithpioneers.com/sports/2017/1/31/outdoor-equipment-rental.aspx) if you're a Smith College student, faculty, or staff.
+
+Reserve your campsite [here](https://www.smith.edu/about-smith/sustainable-smith/macleish-field-station/camping-permit)!
