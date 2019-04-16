@@ -1,8 +1,9 @@
 ---
-title: "mini_proj3"
+title: "Cow Camp & Woods Romp: A New Camping Experience"
 output: 
   html_document:
     code_folding: hide
+    theme: cosmo
 
 ---
 
@@ -21,22 +22,13 @@ library(macleish)
 ```
 
 
-```{r}
-ggplot()+
-  geom_sf(data =macleish_layers[["boundary"]]) +
-  geom_sf(data =macleish_layers[["trails"]], col = "green") +
-  geom_sf(data =macleish_layers[["forests"]]) +
-  geom_sf(data =macleish_layers[["streams"]], col = "blue") + 
-  geom_sf(data =macleish_layers[["challenge_courses"]], fill = "orange") + 
-  geom_sf(data =macleish_layers[["research"]], fill = "orange")+
-  geom_sf(data =macleish_layers[["contours_30ft"]], col="red") + 
-  geom_sf(data =macleish_layers[["wetlands"]], fill = "yellow") 
-  
-```
+
+![](https://www.kestreltrust.org/wp-content/uploads/2016/09/MacLeish-panoram-Reid-BertoneJohnson-e1474896225961.jpg)
 
 
 
-Base plot:
+
+
 ```{r}
 library(leaflet)
 
@@ -53,7 +45,7 @@ base_plot <- leaflet() %>%
 ```
 
 
-Markers for campsites, research, and parking:
+#Markers for campsites, research, and parking:
 ```{r}
 camp_plot <- 
   base_plot %>% 
@@ -69,7 +61,7 @@ camp_plot
 ```
 
 
-Add circle around parking lot with a 0.5 mile radius:
+#Add circle around parking lot with a 0.5 mile radius:
 ```{r}
 parking_buffer <- base_plot %>%
   addCircles(lng = -72.680663 , lat = 42.448013, weight = 1,
@@ -85,6 +77,7 @@ proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y
 
 
 ```
+
 
 ```{r}
 stream_buffer <- macleish_layers %>%
@@ -112,6 +105,7 @@ challenge_buffer <- macleish_layers %>%
   st_transform(4326)
 ```
 
+#Mapped vegetation types:
 ```{r}
 forests1 <- macleish_layers%>%
   pluck("forests")%>%
@@ -135,7 +129,7 @@ treeplot <- base_plot%>%
 treeplot
 ```
 
-
+#Buffer from streams:
 ```{r}
 base_plot %>%
   addPolygons(data = stream_buffer)%>%
@@ -150,7 +144,8 @@ base_plot %>%
 TreeIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Tree-3-icon.png", iconWidth = 40, iconHeight = 40)
 ```
 
-Campsites with vegetation type:
+
+#Campsites with vegetation type:
 ```{r}
 treeplot %>%
   addMarkers(lng = -72.679210, lat =  42.444697, popup = "Cow Camp", icon = cowIcon)%>%
@@ -161,11 +156,11 @@ treeplot %>%
 
 
 
-Contours:
+#Contours:
 ```{r}
 base_plot%>%
-  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1")%>%
-  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2")%>%
+  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Cow Camp", icon = cowIcon)%>%
+  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Woods Romp", icon = TreeIcon)%>%
   addPolygons(data = pluck(macleish_layers, "contours_3m"), col = "red", weight = 0.5)
   
 
