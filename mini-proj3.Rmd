@@ -14,7 +14,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
 library(tidyverse)
 library(sf)
 library(macleish)
@@ -23,13 +23,13 @@ library(macleish)
 
 
 
-![](https://www.kestreltrust.org/wp-content/uploads/2016/09/MacLeish-panoram-Reid-BertoneJohnson-e1474896225961.jpg)
+![](https://scontent-dfw5-1.cdninstagram.com/vp/87c205f9ee98333a469cd09a180b48dd/5CEB9920/t51.2885-15/e35/42485526_1899318160377189_1335420842347152371_n.jpg?_nc_ht=scontent-dfw5-1.cdninstagram.com&se=8)
 
 
 
 
 
-```{r}
+```{r, echo = FALSE}
 library(leaflet)
 
 base_plot <- leaflet() %>%
@@ -70,7 +70,7 @@ parking_buffer <- base_plot %>%
 parking_buffer
 
 ```
-
+Any point along the outside of the circle is 0.5 miles from the parking lot. We decided to put one site at 0.5 miles away (Woods Romp) and another slightly closer (Cow Camp). 
 
 ```{r}
 proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
@@ -137,6 +137,7 @@ base_plot %>%
   addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2")
 
 ```
+Adding the stream buffers ensures that our sites fall within 200 feet of a stream. 
 
 ```{r}
   cowIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Cow-icon.png", iconWidth = 35, iconHeight = 40)
