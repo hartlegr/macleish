@@ -2,7 +2,7 @@
 title: "mini_proj3"
 output: 
   html_document:
-    code_folding = hide
+    code_folding: hide
 
 ---
 
@@ -13,13 +13,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(sf)
 library(macleish)
 
 ```
-
 
 
 ```{r}
@@ -36,17 +35,8 @@ ggplot()+
 ```
 
 
-```{r, eval = FALSE}
 
-
-st_as_sf(macleish_layers) %>% st_transform(3488)
-
-macleish_layers %>%
-  pluck("streams") %>%
-  st_buffer(dist = 0.1)
-```
-
-
+Base plot:
 ```{r}
 library(leaflet)
 
@@ -58,15 +48,37 @@ base_plot <- leaflet() %>%
 #  addPolylines(data = pluck(macleish_layers, "trails"), col = "green")%>%
 #  addMarkers(data = pluck(macleish_layers, "challenge_courses"), popup = ~cmt)%>%
 #  addPolygons(data = pluck(macleish_layers, "research"), col = "orange")%>%
-  addPolygons(data = pluck(macleish_layers, "wetlands"), col = "red", weight = 2)%>%
- # addPolygons(data = pluck(macleish_layers, "contours_30ft"), col = "red")%>%
-  addMarkers(lng = -72.678154, lat =  42.450976, popup = "Group Campsite") %>%
-  addMarkers(lng = -72.679581, lat = 42.458549, popup = "Remote Campsite") %>%
-  addMarkers(lng = -72.680663, lat = 42.448013, popup = "Parking")%>%
-  addMarkers(lng = -72.680315, lat = 42.449653, popup = "OrchardMet Weather Station")%>%
-  addMarkers(lng = -72.680553, lat = 42.448470, popup = "WhatelyMet Weather Station")
+  addPolygons(data = pluck(macleish_layers, "wetlands"), col = "red", weight = 2)
+ 
+```
+
+
+Markers for campsites, research, and parking:
+```{r}
+camp_plot <- 
+  base_plot %>% 
+addMarkers(lng = -72.678154, lat =  42.450976, popup = "Group Campsite") %>%
+ addMarkers(lng = -72.679581, lat = 42.458549, popup = "Remote Campsite") %>%
+ addMarkers(lng = -72.680663, lat = 42.448013, popup = "Parking")%>%
+ addMarkers(lng = -72.680315, lat = 42.449653, popup = "OrchardMet Weather Station")%>%
+ addMarkers(lng = -72.680553, lat = 42.448470, popup = "WhatelyMet Weather Station")
+
+camp_plot
+
 
 ```
+
+
+Add circle around parking lot with a 0.5 mile radius:
+```{r}
+parking_buffer <- base_plot %>%
+  addCircles(lng = -72.680663 , lat = 42.448013, weight = 1,
+    radius = 804)
+
+parking_buffer
+
+```
+
 
 ```{r}
 proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
@@ -83,21 +95,6 @@ stream_buffer <- macleish_layers %>%
 
 ```
 
-
-
-
-```{r}
-parking <- (coords = c( -72.680663, 42.448013)) %>%
- st_as_sf()
-```
-
-
-```{r, eval = FALSE}
-parking_buffer <- parking %>%
-  st_transform(proj4_aea) %>%
-  st_buffer(dist = 200) %>%
-  st_transform(4326)
-```
 
 ```{r}
 research_buffer <- macleish_layers %>%
@@ -132,8 +129,8 @@ pal <- colorNumeric(
 ```
 
 ```{r}
-treeplot <- base_plot %>%
-  addPolygons(data = forests1, color = ~pal(VegType_21), weight = 2)
+treeplot <- base_plot%>%
+  addPolygons(data = forests1, color = ~pal(VegType_21), weight = 1)
 
 treeplot
 ```
@@ -142,10 +139,8 @@ treeplot
 ```{r}
 base_plot %>%
   addPolygons(data = stream_buffer)%>%
-  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1", col = "red")%>%
-  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2", col = "red")
-
- 
+  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1")%>%
+  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2")
 
 ```
 
@@ -155,7 +150,7 @@ base_plot %>%
 TreeIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Tree-3-icon.png", iconWidth = 40, iconHeight = 40)
 ```
 
-
+Campsites with vegetation type:
 ```{r}
 treeplot %>%
   addMarkers(lng = -72.679210, lat =  42.444697, popup = "Cow Camp", icon = cowIcon)%>%
@@ -164,10 +159,7 @@ treeplot %>%
 ```
 
 
-```{r}
-treeplot %>%
-addLegend(map, position = c("bottomright"), pal = qpal, values = ~VegType_21, opacity = 1)
-```
+
 
 
 ```{r}
