@@ -161,12 +161,12 @@ treeplot %>%
 
 
 
-
+Contours:
 ```{r}
 base_plot%>%
   addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1")%>%
   addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2")%>%
-  addPolygons(data = pluck(macleish_layers, "contours_3m"), col = "red")
+  addPolygons(data = pluck(macleish_layers, "contours_3m"), col = "red", weight = 0.5)
   
 
 ```
