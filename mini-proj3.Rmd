@@ -1,5 +1,6 @@
 ---
 title: "Cow Camp & Woods Romp: Camping Revolutionized"
+author: Amrita Acharya, Callie Slevin, and Grace Hartley
 output: 
   html_document:
     code_folding: hide
@@ -7,7 +8,17 @@ output:
 
 ---
 
+
 ^[https://github.com/hartlegr/macleish]
+
+
+
+
+
+
+
+
+
 
 
 ```{r setup, include=FALSE}
@@ -21,13 +32,15 @@ library(macleish)
 
 ```
 
-
+Our goal was to determine where Smith College could create two additional campsites at the MacLeish Field Station to accomodate a higher number of campers and a wider variety of camping environments.
 
 ![](https://scontent-dfw5-1.cdninstagram.com/vp/87c205f9ee98333a469cd09a180b48dd/5CEB9920/t51.2885-15/e35/42485526_1899318160377189_1335420842347152371_n.jpg?_nc_ht=scontent-dfw5-1.cdninstagram.com&se=8)
 
 
 
 
+
+Though the property of MacLeish spans 240 acres, the number of locations for possible campsites that meet the specified criteria is limited. In order to discover these hidden getaways, we plotted various landmarks and features of the land. 
 
 
 ```{r, echo = FALSE}
@@ -60,7 +73,7 @@ camp_plot
 
 
 ```
-
+Here we have outlined the MacLeish property with the gray line, and marked the locations of the two existing campsites. The two weather stations and the parking lot are also shown as reference points.
 
 #Add circle around parking lot with a 0.5 mile radius:
 ```{r}
@@ -71,7 +84,7 @@ parking_buffer <- base_plot %>%
 parking_buffer
 
 ```
-Any point along the outside of the circle is 0.5 miles from the parking lot. We decided to put one site at 0.5 miles away (Woods Romp) and another slightly closer (Cow Camp). 
+Any point along the outside of the circle is 0.5 miles from the parking lot. We decided to put one site at 0.5 miles away (Woods Romp) and another slightly closer (Cow Camp), which caters both towards groups that don't want to walk far to their site and groups that want to incorporate bit of a trek in their trip. 
 
 ```{r, echo = FALSE}
 proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
@@ -167,9 +180,25 @@ base_plot%>%
   
 
 ```
++1 for reporting at least one actionable recommendation (what should Smith DO with your findings?)
+
++1 for including a short discussion on the resources necessary to implement your recommendation:
+what will it cost?
+how long will it take?
+are there any concerns about environmental impact?
+do you see any major roadblocks?
 
 #Ready to camp?
 
 Rent gear for your trip [here](https://smithpioneers.com/sports/2017/1/31/outdoor-equipment-rental.aspx) if you're a Smith College student, faculty, or staff.
 
 Reserve your campsite [here](https://www.smith.edu/about-smith/sustainable-smith/macleish-field-station/camping-permit)!
+
+
+
+
+*Word Count:*
+```{r, message = FALSE}
+
+wordcountaddin::word_count("mini-proj3.rmd")
+```
