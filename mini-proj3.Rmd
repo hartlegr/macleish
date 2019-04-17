@@ -73,7 +73,7 @@ camp_plot
 
 
 ```
-Here we have outlined the MacLeish property with the gray line, and marked the locations of the two existing campsites. The two weather stations and the parking lot are also shown as reference points.
+Here we have outlined the MacLeish property with the gray line, and marked the locations of the two existing campsites. The two weather stations and the parking lot are also shown as reference points, as well as the wetlands shown in red. 
 
 #Add circle around parking lot with a 0.5 mile radius:
 ```{r}
@@ -84,7 +84,7 @@ parking_buffer <- base_plot %>%
 parking_buffer
 
 ```
-Any point along the outside of the circle is 0.5 miles from the parking lot. We decided to put one site at 0.5 miles away (Woods Romp) and another slightly closer (Cow Camp), which caters both towards groups that don't want to walk far to their site and groups that want to incorporate bit of a trek in their trip. 
+Any point along the outside of the circle is 0.5 miles from the parking lot. We decided to put one site at 0.5 miles away (Woods Romp) and another slightly closer (Cow Camp), which caters both towards groups that don't want to walk far to their site and groups that want to incorporate a bit of a trek in their trip. 
 
 ```{r, echo = FALSE}
 proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
@@ -119,6 +119,12 @@ challenge_buffer <- macleish_layers %>%
   st_transform(4326)
 ```
 
+```{r}
+  cowIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Cow-icon.png", iconWidth = 35, iconHeight = 40)
+
+TreeIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Tree-3-icon.png", iconWidth = 40, iconHeight = 40)
+```
+
 
 ```{r, echo = FALSE}
 forests1 <- macleish_layers%>%
@@ -138,27 +144,13 @@ pal <- colorNumeric(
 #Mapped vegetation types:
 ```{r}
 treeplot <- base_plot%>%
-  addPolygons(data = forests1, color = ~pal(VegType_21), weight = 1)
+  addPolygons(data = forests1, color = ~pal(VegType_21), weight = 1)%>%
+  addMarkers(lng = -72.678154, lat =  42.450976, popup = "Group Campsite") %>%
+ addMarkers(lng = -72.679581, lat = 42.458549, popup = "Remote Campsite")
 
 treeplot
 ```
-
-#Buffer from streams:
-```{r}
-base_plot %>%
-  addPolygons(data = stream_buffer)%>%
-  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Proposed Site 1")%>%
-  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Proposed Site 2")
-
-```
-Adding the stream buffers ensures that our sites fall within 200 feet of a stream. 
-
-```{r}
-  cowIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Cow-icon.png", iconWidth = 35, iconHeight = 40)
-
-TreeIcon <- makeIcon(iconUrl = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Tree-3-icon.png", iconWidth = 40, iconHeight = 40)
-```
-
+Next, we mapped color onto the type of vegetation to see what type of forest layer each of the existing sites has.
 
 #Campsites with vegetation type:
 ```{r}
@@ -167,7 +159,17 @@ treeplot %>%
   addMarkers(lng = -72.683844, lat =  42.455057, popup = "Woods Romp", icon = TreeIcon)
 
 ```
+Here is the first look at two proposed sites in relation to the vegetation type mapping. Notice that the type of vegetation at Cow Camp (cow icon) and Woods Romp (pine tree icon) are different from the two existing sites, which we still see. This promises four distinct environments to experience within mere miles of each other.
 
+#Buffer from streams:
+```{r}
+base_plot %>%
+  addPolygons(data = stream_buffer)%>%
+  addMarkers(lng = -72.679210, lat =  42.444697, popup = "Cow Camp", icon = cowIcon)%>%
+  addMarkers(lng = -72.683844, lat =  42.455057, popup = "Woods Romp", icon = TreeIcon)
+
+```
+Notice that the existing sites aren't on the map anymore. It is necessary to consider their proximity to the streams, so adding buffers around them ensures that our sites fall within 200 feet of a stream. It's also worth noting that both of our proposed locations are not in the wetlands, so there is no need to worry about a damp departure!
 
 
 
@@ -180,6 +182,8 @@ base_plot%>%
   
 
 ```
+No matter how perfect the locale is in terms of proximity to parking, water accessibility, and diversity in tree canopy, a campsite on a significant slant is no one's cup of tea. To account for this, we checked that the topography of MacLeish was within reason at each of the proposed sites. Here, we have mapped the 3m contours and show that both sites are in relatively flat areas. 
+
 +1 for reporting at least one actionable recommendation (what should Smith DO with your findings?)
 
 +1 for including a short discussion on the resources necessary to implement your recommendation:
@@ -187,7 +191,8 @@ what will it cost?
 how long will it take?
 are there any concerns about environmental impact?
 do you see any major roadblocks?
-
+ THE NAMES
+ 
 #Ready to camp?
 
 Rent gear for your trip [here](https://smithpioneers.com/sports/2017/1/31/outdoor-equipment-rental.aspx) if you're a Smith College student, faculty, or staff.
