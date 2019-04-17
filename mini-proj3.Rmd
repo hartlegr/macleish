@@ -184,14 +184,20 @@ base_plot%>%
 ```
 No matter how perfect the locale is in terms of proximity to parking, water accessibility, and diversity in tree canopy, a campsite on a significant slant is no one's cup of tea. To account for this, we checked that the topography of MacLeish was within reason at each of the proposed sites. Here, we have mapped the 3m contours and show that both sites are in relatively flat areas. 
 
-+1 for reporting at least one actionable recommendation (what should Smith DO with your findings?)
+These spots are seemingly perfect for a night under the stars. One site, however, has a hidden bonus (or hitch). Cow Camp is in an area that cattle traverse frequently. No matter what one's bovine beliefs are, this is an incredibly authenthic experience (but be forewarned!).
+
+With this information available, Smith should consider implementing these areas as potential campsites. 30 students in total can be accomodated at MacLeish on any given night currently. Though this is impressive, it is not nearly as high a proportion of the total Smith population as it should be in order to ensure that MacLeish is utilized to the max. Adding additional sites will allow for more students to learn from the space without crowding the exisiting sites. Plus, these sites might appeal to individuals in ways that the existing sites do not (i.e. an affinity for cows, a desire be a little farther off the grid). 
+
+Smith should take our findings, and make sure that what we found from the data is empirically true/practical. 
+
+
 
 +1 for including a short discussion on the resources necessary to implement your recommendation:
 what will it cost?
 how long will it take?
 are there any concerns about environmental impact?
 do you see any major roadblocks?
- THE NAMES
+
  
 #Ready to camp?
 
